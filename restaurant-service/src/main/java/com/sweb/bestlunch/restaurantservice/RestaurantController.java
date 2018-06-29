@@ -10,6 +10,7 @@ import java.util.List;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8080")
 public class RestaurantController {
     private RestaurantRepository repository;
 
@@ -18,7 +19,6 @@ public class RestaurantController {
         this.repository = repository;
     }
 
-    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/restaurants")
     public List<Restaurant> retrieveRestaurants(){
 
@@ -26,14 +26,12 @@ public class RestaurantController {
         return repository.findAll();
     }
 
-    @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping("/restaurant/add")
     public ResponseEntity<String> saveOrUpdateRestaurant(@RequestBody Restaurant restaurant){
         repository.save(restaurant);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @CrossOrigin(origins = "http://localhost:8080")
     @DeleteMapping("/restaurant/{id}")
     public ResponseEntity<String> deleteRestaurant(@PathVariable Long id){
         repository.deleteById(id);
