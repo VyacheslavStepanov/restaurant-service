@@ -1,5 +1,6 @@
-package com.sweb.bestlunch.restaurantservice;
+package com.sweb.bestlunch.restaurantservice.restaurant;
 
+import com.sweb.bestlunch.restaurantservice.restaurant.Restaurant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
