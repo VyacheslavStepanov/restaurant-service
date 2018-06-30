@@ -1,7 +1,7 @@
-package com.sweb.bestlunch.restaurantservice;
+package com.sweb.bestlunch.restaurantservice.restaurant;
 
+import com.sweb.bestlunch.restaurantservice.Address;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -11,7 +11,7 @@ import java.util.Date;
 @Entity
 @Table(name="restaurants")
 public class Restaurant {
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;

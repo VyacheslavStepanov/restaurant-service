@@ -1,6 +1,5 @@
-package com.sweb.bestlunch.restaurantservice;
+package com.sweb.bestlunch.restaurantservice.restaurant;
 
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +21,6 @@ public class RestaurantController {
 
     @GetMapping("/restaurants")
     public List<Restaurant> retrieveRestaurants(){
-
-        List<Restaurant> restaurants = repository.findAll();
         return repository.findAll();
     }
 
