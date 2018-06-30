@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -33,8 +34,14 @@ public class RestaurantController {
     }
 
     @DeleteMapping("/restaurant/{id}")
-    public ResponseEntity<String> deleteRestaurant(@PathVariable Long id){
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteRestaurant(@PathVariable Long id){
         repository.deleteById(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @GetMapping("/restaurant/{id}")
+    public Restaurant getRestaurant(@PathVariable Long id){
+        Optional<Restaurant> optionalRestaurant = repository.findById(id);
+        return optionalRestaurant.orElse(null);
     }
 }
