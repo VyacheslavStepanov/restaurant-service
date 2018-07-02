@@ -7,6 +7,6 @@ insert into restaurants  (name, email, phone_number) values ('Dolche vita','mail
 insert into restaurants  (name, email, phone_number) values ('Georgia','mail@georgia.com','88008008090');
 
 
-insert into products  (name, description, cost_price) values ('Borsch','Soup with borsch',60.00);
-insert into products  (name, description, cost_price) values ('Pasta','Pasta with  mushroom sauce', 100.00);
-insert into products  (name, description, cost_price) values ('Tea','Black tea', 30.00);
+insert into products  (name, description, cost_price, restaurant_id) values ('Borsch','Soup with borsch',60.00, 1);
+insert into products  (name, description, cost_price, restaurant_id) values ('Pasta','Pasta with  mushroom sauce', 100.00, 1);
+insert into products  (name, description, cost_price, restaurant_id) values ('Tea','Black tea', 30.00, 1);

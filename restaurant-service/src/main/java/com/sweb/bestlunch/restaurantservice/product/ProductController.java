@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
-@RequestMapping("/product")
+@RequestMapping("restaurant/{restaurantId}/product")
 public class ProductController {
 
     private ProductRepository repository;
@@ -21,23 +21,23 @@ public class ProductController {
     }
 
     @GetMapping("/all")
-    public List<Product> getProducts(){
-        return repository.findAll();
+    public List<Product> getProducts(@PathVariable("restaurantId") Long restaurantId){
+        return repository.findAllByRestaurantId(restaurantId);
     }
 
-    @GetMapping("/{id}")
-    public Product getProduct(@PathVariable("id") Long id){
-        Optional<Product> optionalProduct = repository.findById(id);
-        return optionalProduct.orElse(null);
+    @GetMapping("/{productId}")
+    public Product getProduct(@PathVariable("restaurantId") Long restaurantId,@PathVariable("productId") Long productId){
+        return repository.findByRestaurantIdAndId(restaurantId, productId);
     }
 
-    @PostMapping("/product/save")
+    @PostMapping("/save")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void saveOrUpdateProduct(@RequestBody Product product){
+    public void saveOrUpdateProduct(@RequestBody Product product, @PathVariable("restaurantId") Long restaurantId){
         repository.save(product);
     }
 
-    @DeleteMapping("/product/{id}")
+
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteProduct(@PathVariable("id") Long id){
         repository.deleteById(id);

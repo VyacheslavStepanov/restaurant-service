@@ -1,5 +1,6 @@
 package com.sweb.bestlunch.restaurantservice.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sweb.bestlunch.restaurantservice.restaurant.Restaurant;
 
 import javax.persistence.*;
@@ -21,7 +22,8 @@ public class Product {
     @Column(name="cost_price")
     private Double costPrice;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch=FetchType.LAZY)
     private Restaurant restaurant;
 
     public Product(){}
