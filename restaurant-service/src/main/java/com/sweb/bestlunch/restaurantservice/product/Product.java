@@ -23,7 +23,7 @@ public class Product {
     private Double costPrice;
 
     @JsonIgnore
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     private Restaurant restaurant;
 
     public Product(){}

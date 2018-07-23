@@ -1,5 +1,7 @@
 package com.sweb.bestlunch.restaurantservice.product;
 
+import com.sweb.bestlunch.restaurantservice.restaurant.Restaurant;
+import com.sweb.bestlunch.restaurantservice.restaurant.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,34 +15,37 @@ import java.util.Optional;
 @RequestMapping("restaurant/{restaurantId}/product")
 public class ProductController {
 
-    private ProductRepository repository;
+    private ProductRepository productRepository;
+    private RestaurantRepository restaurantRepository;
 
     @Autowired
-    public ProductController(ProductRepository repository){
-        this.repository = repository;
+    public ProductController(ProductRepository productRepository, RestaurantRepository restaurantRepository){
+        this.productRepository = productRepository;
+        this.restaurantRepository = restaurantRepository;
     }
 
     @GetMapping("/all")
     public List<Product> getProducts(@PathVariable("restaurantId") Long restaurantId){
-        return repository.findAllByRestaurantId(restaurantId);
+        return productRepository.findAllByRestaurantId(restaurantId);
     }
 
     @GetMapping("/{productId}")
     public Product getProduct(@PathVariable("restaurantId") Long restaurantId,@PathVariable("productId") Long productId){
-        return repository.findByRestaurantIdAndId(restaurantId, productId);
+        return productRepository.findByRestaurantIdAndId(restaurantId, productId);
     }
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void saveOrUpdateProduct(@RequestBody Product product, @PathVariable("restaurantId") Long restaurantId){
-        repository.save(product);
+    public void saveOrUpdateProduct(@RequestBody Product updatedProduct, @PathVariable("restaurantId") Long restaurantId){
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).orElse(new Restaurant());
+        updatedProduct.setRestaurant(restaurant);
+        productRepository.save(updatedProduct);
     }
-
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteProduct(@PathVariable("id") Long id){
-        repository.deleteById(id);
+        productRepository.deleteById(id);
     }
 }
 
